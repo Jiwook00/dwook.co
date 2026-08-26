@@ -1,0 +1,165 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/Container.astro";
+import { SITE, HOME, SOCIALS } from "@consts";
+import ArrowCard from "@components/ArrowCard.astro";
+import Link from "@components/Link.astro";
+import { dateRange, duration } from "@lib/utils";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+const blog = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
+
+const projects: CollectionEntry<"projects">[] = (
+  await getCollection("projects")
+)
+  .filter((project) => !project.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
+
+const work = (await getCollection("work"))
+  .sort((a, b) => b.data.dateStart.valueOf() - a.data.dateStart.valueOf())
+  .slice(0, SITE.NUM_WORKS_ON_HOMEPAGE);
+---
+
+<Layout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+  <Container>
+    <aside data-pagefind-ignore>
+      <h4 class="animate font-semibold text-black dark:text-white">김지욱</h4>
+      <h4>소프트웨어 개발자</h4>
+      <div class="space-y-16">
+        <section>
+          <article class="space-y-4">
+            <p class="animate">
+              AWS 인프라 최적화와 대규모 마이그레이션 경험을 보유한 5년 차
+              백엔드/인프라 개발자입니다. 문제 분석부터 솔루션 구현까지
+              주도적으로 수행하며 비용 절감과 성능 개선에 기여했습니다. AI
+              도구를 개발 전반에 활용해 반복 작업을 자동화하고 업무 속도와
+              범위를 확대하고 있습니다.
+            </p>
+            <p class="animate">
+              이곳에는 지금까지 해온 일과 만들고 있는 것들, 그리고 그 과정에서
+              부딪힌 문제와 해결한 방법을 기록합니다.
+            </p>
+          </article>
+        </section>
+
+        <section class="animate space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-y-2">
+            <h5 class="font-semibold text-black dark:text-white">
+              Work Experience
+            </h5>
+            <Link href="/work">See all work</Link>
+          </div>
+          <ul class="flex flex-col space-y-8">
+            {
+              work.map((entry) => (
+                <li class="space-y-2">
+                  <div class="space-y-1">
+                    <div class="font-semibold text-black dark:text-white">
+                      {entry.data.company}
+                    </div>
+                    <div class="text-sm opacity-75">{entry.data.role}</div>
+                    <div class="text-sm opacity-75">
+                      {dateRange(entry.data.dateStart, entry.data.dateEnd)}
+                      {duration(entry.data.dateStart, entry.data.dateEnd) && (
+                        <span>
+                          {" · "}
+                          {duration(entry.data.dateStart, entry.data.dateEnd)}
+                        </span>
+                      )}
+                      {" · "}
+                      {entry.data.summary}
+                    </div>
+                  </div>
+                  {entry.data.highlights && (
+                    <ul class="list-disc space-y-1 pl-5 text-sm">
+                      {entry.data.highlights.map((highlight) => (
+                        <li>{highlight}</li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <section class="animate space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-y-2">
+            <h5 class="font-semibold text-black dark:text-white">
+              Recent projects
+            </h5>
+            <Link href="/projects">See all projects</Link>
+          </div>
+          <ul class="flex flex-col gap-4">
+            {
+              projects.map((project) => (
+                <li>
+                  <ArrowCard entry={project} />
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <section class="animate space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-y-2">
+            <h5 class="font-semibold text-black dark:text-white">
+              Latest posts
+            </h5>
+            <Link href="/blog">See all posts</Link>
+          </div>
+          <ul class="flex flex-col gap-4">
+            {
+              blog.map((post) => (
+                <li>
+                  <ArrowCard entry={post} />
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <section class="animate space-y-4">
+          <h5 class="font-semibold text-black dark:text-white">
+            Let's Connect
+          </h5>
+          <article>
+            <p>
+              무언가에 대해 이야기하고 싶거나 그냥 인사를 건네고 싶다면, 소셜
+              미디어나 이메일로 편하게 연락 주세요.
+            </p>
+          </article>
+          <ul class="flex flex-wrap gap-2">
+            {
+              SOCIALS.map((SOCIAL) => (
+                <li class="flex gap-x-2 text-nowrap">
+                  <Link
+                    href={SOCIAL.HREF}
+                    external
+                    aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
+                  >
+                    {SOCIAL.NAME}
+                  </Link>
+                  {"/"}
+                </li>
+              ))
+            }
+            <li class="line-clamp-1">
+              <Link
+                href={`mailto:${SITE.EMAIL}`}
+                aria-label={`Email ${SITE.TITLE}`}
+              >
+                {SITE.EMAIL}
+              </Link>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </aside>
+  </Container>
+</Layout>

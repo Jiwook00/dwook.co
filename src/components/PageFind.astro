@@ -1,0 +1,147 @@
+---
+import Search from "astro-pagefind/components/Search";
+---
+
+<aside data-pagefind-ignore>
+  <div
+    transition:persist
+    id="backdrop"
+    class="invisible fixed top-0 left-0 z-50 flex h-screen w-full justify-center bg-stone-900/20 p-6 backdrop-blur-sm"
+  >
+    <div
+      id="pagefind-container"
+      class="m-0 flex h-fit max-h-[80%] w-full max-w-(--breakpoint-sm) flex-col overflow-auto rounded-sm border border-black/15 bg-stone-100 p-2 px-4 py-3 shadow-lg"
+    >
+      <Search
+        id="search"
+        className="pagefind-ui"
+        uiOptions={{
+          showImages: false,
+          excerptLength: 15,
+          resetStyles: false,
+        }}
+      />
+      <div class="mr-2 pt-4 pb-1 text-right text-xs text-black/40">
+        <kbd class="font-mono">Esc</kbd> 또는 바깥을 클릭하면 닫힙니다
+      </div>
+    </div>
+  </div>
+</aside>
+
+<script is:inline>
+  const magnifyingGlass = document.getElementById("magnifying-glass");
+  const backdrop = document.getElementById("backdrop");
+
+  function openPagefind() {
+    const searchDiv = document.getElementById("search");
+    const search = searchDiv.querySelector("input");
+    setTimeout(() => {
+      search.focus();
+    }, 0);
+    backdrop?.classList.remove("invisible");
+    backdrop?.classList.add("visible");
+  }
+
+  function closePagefind() {
+    const search = document.getElementById("search");
+    search.value = "";
+    backdrop?.classList.remove("visible");
+    backdrop?.classList.add("invisible");
+  }
+
+  // open pagefind
+  magnifyingGlass?.addEventListener("click", () => {
+    openPagefind();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "/") {
+      e.preventDefault();
+      openPagefind();
+    } else if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      e.preventDefault();
+      openPagefind();
+    }
+  });
+
+  // close pagefind
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closePagefind();
+    }
+  });
+
+  // close pagefind when searched result(link) clicked
+  document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("pagefind-ui__result-link")) {
+      closePagefind();
+    }
+  });
+
+  backdrop?.addEventListener("click", (event) => {
+    if (!event.target.closest("#pagefind-container")) {
+      closePagefind();
+    }
+  });
+
+  // prevent form submission
+  const form = document.getElementById("form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+</script>
+
+<style is:global>
+  :root {
+    --pagefind-ui-scale: 0.75;
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 3px;
+    --pagefind-ui-font: "Pretendard Variable", Pretendard, sans-serif;
+    --pagefind-ui-primary: #1c1917; /* stone-900 */
+    --pagefind-ui-text: #57534e; /* stone-600 */
+    --pagefind-ui-background: #f5f5f4; /* stone-100 */
+    --pagefind-ui-border: #d6d3d1; /* stone-300 */
+    --pagefind-ui-tag: #e7e5e4; /* stone-200 */
+  }
+
+  #search input {
+    font-weight: normal;
+  }
+
+  #search input::placeholder {
+    color: #a8a29e; /* stone-400 */
+  }
+
+  #search p {
+    font-weight: normal;
+  }
+
+  #search .pagefind-ui__result-title {
+    font-weight: 600;
+  }
+
+  /* 결과 링크 hover 시 사이트 액센트(amber)로 밑줄 */
+  #search .pagefind-ui__result-link {
+    text-decoration: none;
+  }
+
+  #search .pagefind-ui__result-link:hover {
+    color: #1c1917; /* stone-900 */
+    text-decoration: underline;
+    text-decoration-color: rgba(180, 83, 9, 0.5); /* amber-700/50 */
+    text-underline-offset: 3px;
+  }
+
+  /* 매칭된 검색어 하이라이트도 amber 톤으로 */
+  #search mark {
+    background-color: rgba(180, 83, 9, 0.12); /* amber-700/12 */
+    color: #b45309; /* amber-700 */
+    border-radius: 2px;
+    padding: 0 1px;
+  }
+
+  #search .pagefind-ui__message {
+    padding: 0;
+    padding-bottom: 0.75rem;
+  }
+</style>

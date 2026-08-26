@@ -1,0 +1,51 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  entry: CollectionEntry<"blog">;
+};
+
+const { entry } = Astro.props;
+---
+
+<a
+  href={`/${entry.collection}/${entry.id}`}
+  class="not-prose group relative flex flex-nowrap items-center border-b border-black/10 py-4 pr-10 pl-3 transition-colors duration-300 ease-in-out hover:border-transparent hover:bg-black/5 hover:text-black focus-visible:border-transparent focus-visible:bg-black/5 focus-visible:text-black dark:border-white/10 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white [li:first-child>&]:hover:rounded-t-lg [li:first-child>&]:focus-visible:rounded-t-lg [li:last-child>&]:border-transparent [li:last-child>&]:hover:rounded-b-lg [li:last-child>&]:focus-visible:rounded-b-lg"
+>
+  <div class="flex flex-1 flex-col truncate">
+    <div class="font-semibold text-black dark:text-white">
+      {entry.data.title}
+    </div>
+    <div class="truncate text-sm text-black/50 dark:text-white/50">
+      {entry.data.description}
+    </div>
+  </div>
+
+  <!-- 기본: chevron(›) — 호버 시 사라짐 -->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    class="absolute top-1/2 right-3 size-5 -translate-y-1/2 fill-none stroke-current stroke-2 text-black/25 opacity-100 transition-opacity duration-300 ease-in-out group-hover:opacity-0 group-focus-visible:opacity-0 dark:text-white/25"
+  >
+    <polyline points="9 6 15 12 9 18"></polyline>
+  </svg>
+
+  <!-- 호버: 화살표(→) 애니메이션 -->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    class="absolute top-1/2 right-3 size-5 -translate-y-1/2 fill-none stroke-current stroke-2 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100 group-focus-visible:opacity-100"
+  >
+    <line
+      x1="5"
+      y1="12"
+      x2="19"
+      y2="12"
+      class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"
+    ></line>
+    <polyline
+      points="12 5 19 12 12 19"
+      class="-translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"
+    ></polyline>
+  </svg>
+</a>

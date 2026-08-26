@@ -1,0 +1,63 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/Container.astro";
+import { dateRange, duration } from "@lib/utils";
+import { WORK } from "@consts";
+
+const collection = (await getCollection("work")).sort(
+  (a, b) => b.data.dateStart.valueOf() - a.data.dateStart.valueOf(),
+);
+
+const work = await Promise.all(
+  collection.map(async (item) => {
+    const { Content } = await render(item);
+    return { ...item, Content };
+  }),
+);
+---
+
+<Layout title={WORK.TITLE} description={WORK.DESCRIPTION}>
+  <Container>
+    <aside data-pagefind-ignore>
+      <div class="space-y-10">
+        <div class="animate font-semibold text-black dark:text-white">Work</div>
+        <ul class="flex flex-col space-y-16">
+          {
+            work.map((entry) => (
+              <li class="work-entry animate space-y-4">
+                <div class="space-y-1">
+                  <div class="font-semibold text-black dark:text-white">
+                    {entry.data.company}
+                  </div>
+                  <div class="text-sm opacity-75">{entry.data.role}</div>
+                  <div class="text-sm opacity-75">
+                    {dateRange(entry.data.dateStart, entry.data.dateEnd)}
+                    {duration(entry.data.dateStart, entry.data.dateEnd) && (
+                      <span>
+                        {" · "}
+                        {duration(entry.data.dateStart, entry.data.dateEnd)}
+                      </span>
+                    )}
+                    {" · "}
+                    {entry.data.summary}
+                  </div>
+                </div>
+                <ul class="flex flex-wrap gap-x-2 gap-y-1 text-xs opacity-75">
+                  {entry.data.stack.map((tech) => (
+                    <li class="rounded border border-black/10 px-2 py-0.5 dark:border-white/15">
+                      {tech}
+                    </li>
+                  ))}
+                </ul>
+                <article>
+                  <entry.Content />
+                </article>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </aside>
+  </Container>
+</Layout>
