@@ -3,6 +3,7 @@ title: "블로그를 직접 만들기로 했다"
 description: "티스토리도 벨로그도 아닌, 직접 운영하는 블로그를 Astro로 세운 이유."
 date: "2026-08-22"
 tags: ["blog", "astro", "회고"]
+draft: true
 ---
 
 첫 글이다.

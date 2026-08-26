@@ -4,6 +4,7 @@ description: "직접 운영하는 개인 블로그이자 포트폴리오. 지금
 date: "2026-08-22"
 demoURL: "https://dwook.co"
 repoURL: ""
+draft: true
 ---
 
 ## dwook.co

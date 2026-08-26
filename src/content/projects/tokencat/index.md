@@ -4,6 +4,7 @@ description: "Claude Code의 토큰 소비에 반응하는 macOS 메뉴바 펫."
 date: "2026-06-01"
 demoURL: ""
 repoURL: ""
+draft: true
 ---
 
 ## TokenCat

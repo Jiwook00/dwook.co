@@ -26,6 +26,7 @@ pnpm-debug.log*
 # 공개하지 않는 개인 작업 메모 (로컬에서만 유지)
 TODO.md
 블로그구축기획서.md
+CLOUDFLARE-이전-체크리스트.md
 
 # jetbrains setting folder
 .idea/
