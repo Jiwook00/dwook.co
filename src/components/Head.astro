@@ -71,7 +71,6 @@ const { title, description, image = "/og.jpg" } = Astro.props;
     onScroll();
     animate();
     addCopyCodeButtons();
-    setGiscusTheme();
 
     const backToTop = document.getElementById("back-to-top");
     backToTop?.addEventListener("click", (event) => scrollToTop(event));
@@ -144,16 +143,6 @@ const { title, description, image = "/og.jpg" } = Astro.props;
       });
     }
   }
-
-  const setGiscusTheme = () => {
-    const giscus = document.querySelector(".giscus-frame");
-
-    if (giscus) {
-      const url = new URL(giscus.src);
-      url.searchParams.set("theme", "light");
-      giscus.src = url.toString();
-    }
-  };
 
   document.addEventListener("DOMContentLoaded", () => init());
   document.addEventListener("astro:after-swap", () => init());

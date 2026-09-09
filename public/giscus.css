@@ -1,0 +1,142 @@
+/*
+  dwook.co giscus 커스텀 테마
+  사이트 팔레트(stone 배경 + amber 액센트)와 Pretendard/JetBrains Mono에 맞춘다.
+  giscus가 <link rel="stylesheet" crossorigin="anonymous">로 불러가므로
+  public/_headers 의 CORS 헤더가 함께 있어야 적용된다.
+*/
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap");
+
+main {
+  /* 코드 하이라이트 — global.css 의 --astro-code-* 토큰과 동일 계열 */
+  --color-prettylights-syntax-comment: #a19595;
+  --color-prettylights-syntax-constant: #2b70c5;
+  --color-prettylights-syntax-entity: #429996;
+  --color-prettylights-syntax-storage-modifier-import: #09090b;
+  --color-prettylights-syntax-entity-tag: #429996;
+  --color-prettylights-syntax-keyword: #f47067;
+  --color-prettylights-syntax-string: #00a99a;
+  --color-prettylights-syntax-variable: #4e8fdf;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #b91c1c;
+  --color-prettylights-syntax-invalid-illegal-text: #fafafa;
+  --color-prettylights-syntax-invalid-illegal-bg: #b91c1c;
+  --color-prettylights-syntax-carriage-return-text: #fafafa;
+  --color-prettylights-syntax-carriage-return-bg: #b91c1c;
+  --color-prettylights-syntax-string-regexp: #00a99a;
+  --color-prettylights-syntax-markup-list: #a16207;
+  --color-prettylights-syntax-markup-heading: #2b70c5;
+  --color-prettylights-syntax-markup-italic: #09090b;
+  --color-prettylights-syntax-markup-bold: #09090b;
+  --color-prettylights-syntax-markup-deleted-text: #7f1d1d;
+  --color-prettylights-syntax-markup-deleted-bg: #fee2e2;
+  --color-prettylights-syntax-markup-inserted-text: #14532d;
+  --color-prettylights-syntax-markup-inserted-bg: #dcfce7;
+  --color-prettylights-syntax-markup-changed-text: #78350f;
+  --color-prettylights-syntax-markup-changed-bg: #fef3c7;
+  --color-prettylights-syntax-markup-ignored-text: #09090b;
+  --color-prettylights-syntax-markup-ignored-bg: #e7e5e4;
+  --color-prettylights-syntax-meta-diff-range: #ae42a0;
+  --color-prettylights-syntax-brackethighlighter-angle: #8996a3;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #a8a29e;
+  --color-prettylights-syntax-constant-other-reference-link: #8d85ff;
+
+  /* 버튼 */
+  --color-btn-text: rgb(0 0 0 / 60%);
+  --color-btn-bg: transparent;
+  --color-btn-border: rgb(0 0 0 / 15%);
+  --color-btn-shadow: 0 0 transparent;
+  --color-btn-inset-shadow: 0 0 transparent;
+  --color-btn-hover-bg: rgb(0 0 0 / 5%);
+  --color-btn-hover-border: rgb(0 0 0 / 25%);
+  --color-btn-active-bg: rgb(0 0 0 / 8%);
+  --color-btn-active-border: rgb(0 0 0 / 25%);
+  --color-btn-selected-bg: rgb(0 0 0 / 8%);
+  --color-btn-primary-text: #fafaf9;
+  --color-btn-primary-bg: #b45309;
+  --color-btn-primary-border: transparent;
+  --color-btn-primary-shadow: 0 0 transparent;
+  --color-btn-primary-inset-shadow: 0 0 transparent;
+  --color-btn-primary-hover-bg: #92400e;
+  --color-btn-primary-hover-border: transparent;
+  --color-btn-primary-selected-bg: #92400e;
+  --color-btn-primary-selected-shadow: 0 0 transparent;
+  --color-btn-primary-disabled-text: rgb(250 250 249 / 70%);
+  --color-btn-primary-disabled-bg: rgb(180 83 9 / 45%);
+  --color-btn-primary-disabled-border: transparent;
+
+  --color-action-list-item-default-hover-bg: rgb(0 0 0 / 5%);
+  --color-segmented-control-bg: rgb(0 0 0 / 4%);
+  --color-segmented-control-button-bg: transparent;
+  --color-segmented-control-button-selected-border: rgb(0 0 0 / 25%);
+
+  /* 텍스트 — 본문 text-black/50, 제목 black */
+  --color-fg-default: rgb(0 0 0 / 60%);
+  --color-fg-muted: rgb(0 0 0 / 45%);
+  --color-fg-subtle: rgb(0 0 0 / 35%);
+
+  /* 배경 — 페이지의 stone-100 이 비치도록 투명하게 둔다 */
+  --color-canvas-default: transparent;
+  --color-canvas-overlay: #f5f5f4;
+  --color-canvas-inset: rgb(0 0 0 / 3%);
+  --color-canvas-subtle: rgb(0 0 0 / 3%);
+
+  --color-border-default: rgb(0 0 0 / 12%);
+  --color-border-muted: rgb(0 0 0 / 8%);
+  --color-neutral-muted: rgb(0 0 0 / 6%);
+
+  /* 액센트 — 사이트 링크 hover 와 같은 amber */
+  --color-accent-fg: #b45309;
+  --color-accent-emphasis: #b45309;
+  --color-accent-muted: rgb(180 83 9 / 40%);
+  --color-accent-subtle: rgb(180 83 9 / 10%);
+
+  --color-success-fg: #15803d;
+  --color-attention-fg: #a16207;
+  --color-attention-muted: rgb(161 98 7 / 40%);
+  --color-attention-subtle: rgb(161 98 7 / 12%);
+  --color-danger-fg: #b91c1c;
+  --color-danger-muted: rgb(185 28 28 / 40%);
+  --color-danger-subtle: rgb(185 28 28 / 10%);
+  --color-primer-shadow-inset: 0 0 transparent;
+
+  --color-social-reaction-bg-hover: rgb(0 0 0 / 5%);
+  --color-social-reaction-bg-reacted-hover: rgb(180 83 9 / 12%);
+}
+
+/* 타이포그래피 */
+html,
+body,
+main {
+  background-color: transparent;
+  font-family:
+    "Pretendard Variable", Pretendard, ui-sans-serif, system-ui, sans-serif;
+}
+
+main code,
+main pre,
+main kbd,
+main tt,
+main samp {
+  font-family:
+    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
+}
+
+/* 사이트와 같은 각진 모서리·얇은 테두리 */
+main .gsc-comment-box,
+main .gsc-comment > div,
+main .gsc-reply-box {
+  border-radius: 2px;
+}
+
+main .gsc-comment-box-tabs,
+main .gsc-comment-box-bottom {
+  background-color: transparent;
+}
+
+/* 링크는 본문과 같은 밑줄 스타일 */
+main .gsc-comment-content a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
