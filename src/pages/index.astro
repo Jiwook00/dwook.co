@@ -52,7 +52,8 @@ const work = (await getCollection("work"))
             <h5 class="font-semibold text-black dark:text-white">
               Work Experience
             </h5>
-            <Link href="/work">See all work</Link>
+            <Link href="/work" data-track="home-see-all-work">See all work</Link
+            >
           </div>
           <ul class="flex flex-col space-y-8">
             {
@@ -93,7 +94,9 @@ const work = (await getCollection("work"))
             <h5 class="font-semibold text-black dark:text-white">
               Recent projects
             </h5>
-            <Link href="/projects">See all projects</Link>
+            <Link href="/projects" data-track="home-see-all-projects"
+              >See all projects</Link
+            >
           </div>
           <ul class="flex flex-col gap-4">
             {
@@ -111,7 +114,9 @@ const work = (await getCollection("work"))
             <h5 class="font-semibold text-black dark:text-white">
               Latest posts
             </h5>
-            <Link href="/blog">See all posts</Link>
+            <Link href="/blog" data-track="home-see-all-posts"
+              >See all posts</Link
+            >
           </div>
           <ul class="flex flex-col gap-4">
             {
@@ -136,6 +141,8 @@ const work = (await getCollection("work"))
                     href={SOCIAL.HREF}
                     external
                     aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
+                    data-track="home-social"
+                    data-track-name={SOCIAL.NAME}
                   >
                     {SOCIAL.NAME}
                   </Link>
@@ -147,6 +154,7 @@ const work = (await getCollection("work"))
               <Link
                 href={`mailto:${SITE.EMAIL}`}
                 aria-label={`Email ${SITE.TITLE}`}
+                data-track="home-email"
               >
                 {SITE.EMAIL}
               </Link>

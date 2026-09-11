@@ -46,13 +46,23 @@ const { Content } = await render(project);
         (project.data.demoURL || project.data.repoURL) && (
           <nav class="flex gap-1">
             {project.data.demoURL && (
-              <Link href={project.data.demoURL} external>
+              <Link
+                href={project.data.demoURL}
+                external
+                data-track="project-demo"
+                data-track-slug={project.id}
+              >
                 demo
               </Link>
             )}
             {project.data.demoURL && project.data.repoURL && <span>/</span>}
             {project.data.repoURL && (
-              <Link href={project.data.repoURL} external>
+              <Link
+                href={project.data.repoURL}
+                external
+                data-track="project-repo"
+                data-track-slug={project.id}
+              >
                 repo
               </Link>
             )}

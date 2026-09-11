@@ -66,6 +66,47 @@ const { title, description, image = "/og.jpg" } = Astro.props;
 
 <ClientRouter />
 
+<!-- Umami — data-domains 덕분에 로컬·프리뷰 배포에서는 전송하지 않는다 -->
+<script
+  is:inline
+  defer
+  src="https://cloud.umami.is/script.js"
+  data-website-id="e8e10113-5b34-4914-a51e-8e4c4311c375"
+  data-domains="dwook.co"
+  data-performance="true"></script>
+
+<!--
+  data-track 속성이 붙은 요소의 클릭을 커스텀 이벤트로 보낸다.
+  umami 기본 방식(data-umami-event)은 캡처 단계에서 preventDefault를 걸어
+  내부 링크를 전체 새로고침으로 바꾸고 ClientRouter 전환을 깨뜨리므로 쓰지 않는다.
+  전송은 keepalive fetch라 이동을 붙잡지 않아도 유실되지 않는다.
+  data-track-* 속성은 이벤트 속성으로 함께 전달된다.
+-->
+<script is:inline>
+  if (!window.__trackBound) {
+    window.__trackBound = true;
+
+    document.addEventListener("click", (event) => {
+      const target =
+        event.target instanceof Element
+          ? event.target.closest("[data-track]")
+          : null;
+      if (!target || !window.umami) return;
+
+      const data = {};
+      for (const name of target.getAttributeNames()) {
+        const match = name.match(/^data-track-(.+)$/);
+        if (match) data[match[1]] = target.getAttribute(name);
+      }
+
+      window.umami.track(
+        target.getAttribute("data-track"),
+        Object.keys(data).length ? data : undefined,
+      );
+    });
+  }
+</script>
+
 <script is:inline>
   function init() {
     onScroll();

@@ -7,15 +7,17 @@ import { SITE } from "@consts";
 <header transition:persist>
   <Container>
     <div class="flex flex-wrap justify-between gap-y-2">
-      <Link href="/" underline={false}>
+      <Link href="/" underline={false} data-track="nav-home">
         <div class="font-semibold">
           {SITE.TITLE}
         </div>
       </Link>
       <nav class="flex items-center gap-3 text-sm">
-        <Link href="/blog" underline={false}>blog</Link>
-        <Link href="/projects" underline={false}>projects</Link>
-        <Link href="/work" underline={false}>work</Link>
+        <Link href="/blog" underline={false} data-track="nav-blog">blog</Link>
+        <Link href="/projects" underline={false} data-track="nav-projects"
+          >projects</Link
+        >
+        <Link href="/work" underline={false} data-track="nav-work">work</Link>
         {/* about 페이지는 내용이 채워질 때까지 비공개 — TODO.md 참고 */}
         <button
           id="magnifying-glass"
