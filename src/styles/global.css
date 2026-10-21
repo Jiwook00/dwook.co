@@ -84,11 +84,6 @@
     @apply text-black dark:text-white;
     @apply decoration-amber-700/50 dark:decoration-amber-500/60;
   }
-
-  /* work 항목의 "기간 · 사용 기술" 줄 (h2 바로 다음 문단) */
-  .work-entry article h2 + p {
-    @apply -mt-4 font-mono text-sm opacity-60;
-  }
 }
 
 .animate {

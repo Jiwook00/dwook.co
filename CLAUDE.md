@@ -71,7 +71,7 @@ draft: true # 선택, true면 비공개
 
 **work**: `company`/`summary`(회사·서비스 한 줄 설명)/`role`/`dateStart`/`stack`(기술 배열) 필수, `dateEnd` 필수(날짜 또는 `"재직 중"` 같은 문자열 허용), `highlights`(프로젝트 제목 배열) 선택. `dateStart` 기준 최신순 정렬.
 
-본문은 프로젝트 단위로 쓴다 — `## 프로젝트 제목` 다음 줄에 `기간 · 사용 기술`을 한 문단으로 두고(이 문단은 `.work-entry article h2 + p` 규칙으로 작게 스타일링됨), 그 아래 문제 → 해결 → 성과 순서로 서술한다. `highlights`는 홈 축약 카드에만 쓰이므로 본문 `##` 제목과 같은 문구로 유지한다.
+`/work`는 frontmatter만 보여주는 간단한 이력(회사·역할·기간·`highlights`·`stack`)이고, 홈에는 work를 노출하지 않는다. 상세 이력은 `public/resume.pdf`로 내려받게 한다. md 본문은 현재 렌더링되지 않는다(기록용).
 
 > 필수 frontmatter가 비면 `astro check`/빌드가 **실패**한다. 스키마 변경은 `content.config.ts`에서.
 

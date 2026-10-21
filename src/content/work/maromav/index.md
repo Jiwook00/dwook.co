@@ -7,12 +7,12 @@ dateEnd: "2025-07-01"
 stack:
   ["NestJS", "TypeORM", "PostgreSQL", "AWS", "GitHub Actions", "CloudWatch"]
 highlights:
-  - "공유 프로젝트 조회 API 슬로우 쿼리 개선 (RDS CPU 100% 장애 대응)"
+  - "공유 프로젝트 조회 API 슬로우 쿼리 개선"
   - "교육청 소속 판별을 위한 DB 구조 개선"
   - "Firebase → PostgreSQL 마이그레이션 및 API 서버 재구축"
 ---
 
-## 공유 프로젝트 조회 API 슬로우 쿼리 개선 (RDS CPU 100% 장애 대응)
+## 공유 프로젝트 조회 API 슬로우 쿼리 개선
 
 2022.12\
 PostgreSQL · TypeORM · NestJS · AWS RDS · CloudWatch

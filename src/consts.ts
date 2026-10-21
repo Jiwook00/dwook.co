@@ -6,7 +6,6 @@ export const SITE: Site = {
     "김지욱 — 백엔드·인프라 개발자. 경력과 프로젝트, 기술 글을 모아둔 사이트.",
   EMAIL: "hi@dwook.co",
   NUM_POSTS_ON_HOMEPAGE: 5,
-  NUM_WORKS_ON_HOMEPAGE: 2,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
 };
 
